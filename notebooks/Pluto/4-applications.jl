@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.12.18
+# v0.12.20
 
 using Markdown
 using InteractiveUtils
@@ -10,13 +10,13 @@ using Yao, YaoPlots
 # ╔═╡ d1930710-4466-11eb-3528-8bdcf0543578
 begin
 	using StatsBase: Histogram, fit
-	using Plots: bar, scatter!, gr; gr()
+	using Plots: bar, scatter!, inspectdr; inspectdr()
 	using BitBasis
 	function plotmeasure(x::Array{BitStr{n,Int},1}) where n
 		hist = fit(Histogram, Int.(x), 0:2^n)
 		x = 0
 		if(n<=3)
-			s=8
+			s=2^n
 		elseif(n>3 && n<=6)
 			s=5
 		elseif(n>6 && n<=10)
@@ -26,11 +26,7 @@ begin
 		elseif(n>15)
 			s=1
 		end
-		bar(hist.edges[1] .- 0.5, hist.weights, legend=:none, size=(600*(2^n)/s,400), ylims=(0:maximum(hist.weights)), xlims=(0:2^n), grid=:false, ticks=false, border=:none, color=:lightblue, lc=:lightblue)
-		scatter!(0:2^n-1, ones(2^n,1), markersize=0,
-         series_annotations="|" .* string.(hist.edges[1]; base=2, pad=n) .* "⟩")
-		scatter!(0:2^n-1, zeros(2^n,1) .+ maximum(hist.weights), markersize=0,
-         series_annotations=string.(hist.weights))
+		bar(hist.edges[1] .- 0.5, hist.weights, legend=:none, size=(600*(2^n)/s,400), ylims=(0:maximum(hist.weights)), xlims=(0:2^n), grid=:false, color=:lightblue, xticks=0:2^n, xformatter = x->("|" .* string.(Int(x); base=2, pad=n) .* "〉"))
 	end
 end
 
@@ -175,7 +171,7 @@ md"Wanna see how we can test that? The below function plots the probability as h
 plotmeasure(measuredqubits)
 
 # ╔═╡ b544dd14-446a-11eb-19c1-914694722f0e
-md"The probability of the measurement giving `` |01〉 `` is $ $(sum(measuredqubits .== bit\"01\")/10.24)% $ and the number of times the measurement result is `` |10〉 `` is $ $(sum(measuredqubits .== bit\"10\")/10.24)\%. $"
+md"The probability of the measurement giving `` |01〉 `` is $ $(sum(measuredqubits .== bit\"01\")/10.24)\% $ and the number of times the measurement result is `` |10〉 `` is $ $(sum(measuredqubits .== bit\"10\")/10.24)\%. $"
 
 # ╔═╡ ef6e1276-03d8-11eb-08b6-1fc082d158f6
 md"Implementing the superdense coding."
