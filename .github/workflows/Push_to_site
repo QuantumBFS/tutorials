@@ -15,7 +15,7 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: 'notebooks/Pluto/*'
-        destination_repo: 'varlad/quantumbfs.github.io'
+        destination_repo: 'varlad/varlad.github.io'
         destination_folder: 'notebooks'
         user_email: '1805204@kiit.ac.in'
         user_name: 'varlad'
