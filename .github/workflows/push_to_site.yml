@@ -16,7 +16,6 @@ jobs:
       with:
         source_file: 'notebooks/'
         destination_repo: 'varlad/varlad.github.io'
-        destination_folder: 'notebooks'
         user_email: '1805204@kiit.ac.in'
         user_name: 'varlad'
         commit_message: 'A custom message for the commit'
