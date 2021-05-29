@@ -20,3 +20,4 @@ jobs:
         user_email: '1805204@kiit.ac.in'
         user_name: 'varlad'
         commit_message: 'A custom message for the commit'
+        destination_branch: 'master'
